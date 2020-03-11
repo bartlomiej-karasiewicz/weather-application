@@ -9,21 +9,21 @@ import java.time.LocalDate;
 public class SynopticDTO {
 
     @JsonProperty("id_stacji")
-    private Long idStacji;
-    private String stacja;
+    private Long idStation;
+    private String station;
     @JsonProperty("data_pomiaru")
-    private LocalDate dataPomiaru;
+    private LocalDate measureDate;
     @JsonProperty("godzina_pomiaru")
-    private Integer godzinaPomiaru;
-    private Double temperatura;
+    private Integer measureTime;
+    private Double temperature;
     @JsonProperty("predkosc_wiatru")
-    private Double predkoscWiatru;
+    private Double windSpeed;
     @JsonProperty("kierunek_wiatru")
-    private Integer kierunekWiatru;
+    private Integer windDirection;
     @JsonProperty("wilgotnosc_wzgledna")
-    private Double wilgotnoscWzgledna;
+    private Double relativeHumidity;
     @JsonProperty("suma_opadu")
-    private Double sumaOpadu;
-    private Double cisnienie;
+    private Double totalRainfall;
+    private Double pressure;
 
 }

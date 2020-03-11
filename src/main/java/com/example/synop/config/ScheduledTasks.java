@@ -19,7 +19,7 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 0 * * * *")
     public void report(){
-        synopticFacade.createMultiSyno();
+        synopticFacade.createMultiSynoptic();
         log.info(dateFormat.format(new Date()));
     }
 }

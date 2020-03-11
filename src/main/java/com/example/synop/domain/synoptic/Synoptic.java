@@ -27,24 +27,24 @@ public class Synoptic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "idStation")
-    private Long idStacji;
+    @Column(name = "id_station")
+    private Long idStation;
     @Column(name = "station")
-    private String stacja;
+    private String station;
     @Column(name = "measure_date")
-    private LocalDate dataPomiaru;
+    private LocalDate measureDate;
     @Column(name = "measuare_time")
-    private Integer godzinaPomiaru;
+    private Integer measureTime;
     @Column(name = "temperature")
-    private Double temperatura;
+    private Double temperature;
     @Column(name = "wind_speed")
-    private Double predkoscWiatru;
+    private Double windSpeed;
     @Column(name = "wind_direction")
-    private Integer kierunekWiatru;
+    private Integer windDirection;
     @Column(name = "relative_humidity")
-    private Double wilgotnoscWzgledna;
+    private Double relativeHumidity;
     @Column(name = "total_rainfall")
-    private Double sumaOpadu;
+    private Double totalRainfall;
     @Column(name = "pressure")
-    private Double cisnienie;
+    private Double pressure;
 }

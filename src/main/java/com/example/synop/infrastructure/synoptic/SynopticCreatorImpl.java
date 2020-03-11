@@ -6,30 +6,33 @@ import com.example.synop.domain.synoptic.SynopticCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SynopticCreatorImpl implements SynopticCreator {
 
-    private final SynopticRepository synoRepository;
+    private final SynopticRepository synopticRepository;
 
+    @Transactional
     public void insertData(SynopticDTO synopticDTO){
-        synoRepository.save(Synoptic.builder()
-                .idStacji(synopticDTO.getIdStacji())
-                .stacja(synopticDTO.getStacja())
-                .dataPomiaru(synopticDTO.getDataPomiaru())
-                .godzinaPomiaru(synopticDTO.getGodzinaPomiaru())
-                .temperatura(synopticDTO.getTemperatura())
-                .predkoscWiatru(synopticDTO.getPredkoscWiatru())
-                .kierunekWiatru(synopticDTO.getKierunekWiatru())
-                .wilgotnoscWzgledna(synopticDTO.getWilgotnoscWzgledna())
-                .cisnienie(synopticDTO.getCisnienie())
-                .sumaOpadu(synopticDTO.getSumaOpadu())
+        synopticRepository.save(Synoptic.builder()
+                .idStation(synopticDTO.getIdStation())
+                .station(synopticDTO.getStation())
+                .measureDate(synopticDTO.getMeasureDate())
+                .measureTime(synopticDTO.getMeasureTime())
+                .temperature(synopticDTO.getTemperature())
+                .windSpeed(synopticDTO.getWindSpeed())
+                .windDirection(synopticDTO.getWindDirection())
+                .relativeHumidity(synopticDTO.getRelativeHumidity())
+                .pressure(synopticDTO.getPressure())
+                .totalRainfall(synopticDTO.getTotalRainfall())
                 .build());
     }
 
     @Override
+    @Transactional
     public void insertMultiData(List<SynopticDTO> synoDTOList) {
         synoDTOList.forEach(this::insertData);
     }
