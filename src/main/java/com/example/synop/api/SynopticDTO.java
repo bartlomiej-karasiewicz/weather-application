@@ -20,7 +20,7 @@ public class SynopticDTO {
     private Double predkoscWiatru;
     @JsonProperty("kierunek_wiatru")
     private Integer kierunekWiatru;
-    @JsonProperty("wilgotnosc_Wzgledna")
+    @JsonProperty("wilgotnosc_wzgledna")
     private Double wilgotnoscWzgledna;
     @JsonProperty("suma_opadu")
     private Double sumaOpadu;

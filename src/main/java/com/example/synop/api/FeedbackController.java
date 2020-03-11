@@ -1,6 +1,6 @@
 package com.example.synop.api;
 
-import com.example.synop.config.EmailConfig;
+import com.example.synop.domain.email.EmailSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FeedbackController {
 
-    private final EmailConfig emailConfig;
+    private final EmailSender emailSender;
 
     @PostMapping
     public void sendFeedback() {
@@ -22,8 +22,7 @@ public class FeedbackController {
         mailMessage.setTo("harry4over@googlemail.com");
         mailMessage.setSubject("Awesomeeeeeeeeee!");
         mailMessage.setText("Pozdrawiam!");
-
-        emailConfig.sendMail(mailMessage);
+        emailSender.sendMail(mailMessage);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.synop.infrastructure.synoptic;
 
-import com.example.synop.domain.synoptic.Synoptic;
 import com.example.synop.domain.synoptic.SynopticRetrievalData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,10 +10,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SynoRetrievalDataImpl implements SynopticRetrievalData {
 
-    private final SynopticRepository synoRepository;
+    private final SynopticRepository synopticRepository;
 
     @Override
-    public List<Synoptic> filterByCisnienie(Double cisnienie) {
-        return synoRepository.findByCisnienieGreaterThanEqual(cisnienie);
+    public Double pressureAverage() {
+        List<Double> pressureList=synopticRepository.findByPressure();
+        return pressureList.stream().mapToDouble(value->value).average().getAsDouble();
     }
 }

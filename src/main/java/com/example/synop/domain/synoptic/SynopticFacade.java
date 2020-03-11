@@ -4,8 +4,6 @@ import com.example.synop.domain.client.RestClientData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class SynopticFacade {
@@ -18,5 +16,5 @@ public class SynopticFacade {
     public void createMultiSyno(){
         synoCreator.insertMultiData(restClientData.retrieveData());
     }
-    public List<Synoptic> filterByCisnienie(Double cisnienie){return synoRetrievalData.filterByCisnienie(cisnienie);}
+    public Double pressureAverage(){return synoRetrievalData.pressureAverage();}
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,14 +27,24 @@ public class Synoptic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "idStation")
     private Long idStacji;
+    @Column(name = "station")
     private String stacja;
+    @Column(name = "measure_date")
     private LocalDate dataPomiaru;
+    @Column(name = "measuare_time")
     private Integer godzinaPomiaru;
+    @Column(name = "temperature")
     private Double temperatura;
+    @Column(name = "wind_speed")
     private Double predkoscWiatru;
+    @Column(name = "wind_direction")
     private Integer kierunekWiatru;
+    @Column(name = "relative_humidity")
     private Double wilgotnoscWzgledna;
+    @Column(name = "total_rainfall")
     private Double sumaOpadu;
+    @Column(name = "pressure")
     private Double cisnienie;
 }
