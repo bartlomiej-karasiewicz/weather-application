@@ -17,12 +17,7 @@ public class FeedbackController {
 
     @PostMapping
     public void sendFeedback() {
-
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
-        mailMessage.setTo("harry4over@googlemail.com");
-        mailMessage.setSubject("Awesomeeeeeeeeee!");
-        mailMessage.setText("Pozdrawiam!");
-        emailSender.sendMail(mailMessage);
+        emailSender.emailContent();
     }
 
 }

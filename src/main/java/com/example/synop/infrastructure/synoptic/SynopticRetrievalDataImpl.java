@@ -58,12 +58,12 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
                 .mapToDouble(value -> value.getTemperature())
                 .max()
                 .getAsDouble();
-        String stringStream = synopticRepository.withoutNulls()
+        String station = synopticRepository.withoutNulls()
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<Double,String> stationWithMinTemperature=new HashMap<>();
-        stationWithMinTemperature.put(minTemperature,stringStream);
-        return stationWithMinTemperature;
+        Map<Double,String> stationWithMaxTemperature=new HashMap<>();
+        stationWithMaxTemperature.put(minTemperature,station);
+        return stationWithMaxTemperature;
     }
 }
