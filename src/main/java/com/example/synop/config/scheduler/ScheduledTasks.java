@@ -18,8 +18,8 @@ public class ScheduledTasks {
     private final SynopticFacade synopticFacade;
 
     @Scheduled(cron = "0 0 * * * *")
-    public void report(){
-        synopticFacade.createMultiSynoptic();
+    public void addAllSynopticParameters(){
+        synopticFacade.addMultiSynopticData();
         log.info(dateFormat.format(new Date()));
     }
 }

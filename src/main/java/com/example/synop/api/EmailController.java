@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/feedback")
+@RequestMapping("/email")
 @RequiredArgsConstructor
-public class FeedbackController {
+public class EmailController {
 
     private final EmailSender emailSender;
 
