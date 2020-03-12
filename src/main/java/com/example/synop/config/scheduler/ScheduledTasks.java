@@ -1,5 +1,6 @@
-package com.example.synop.config;
+package com.example.synop.config.scheduler;
 
+import com.example.synop.domain.email.EmailSender;
 import com.example.synop.domain.synoptic.SynopticFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +17,16 @@ public class ScheduledTasks {
 
     private static final SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final SynopticFacade synopticFacade;
+    private final EmailSender emailSender;
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 0 */3 * * *")
     public void addAllSynopticParameters(){
         synopticFacade.addMultiSynopticData();
-        log.info(dateFormat.format(new Date()));
+        log.info("Data was provided at "+dateFormat.format(new Date()));
+    }
+    @Scheduled(cron = "0 0 0 * * *")
+    public void sendMail(){
+        emailSender.emailContent();
+        log.info("Mail was send at " + dateFormat.format(new Date()));
     }
 }

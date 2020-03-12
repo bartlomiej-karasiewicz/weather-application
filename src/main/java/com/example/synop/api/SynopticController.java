@@ -23,7 +23,7 @@ public class SynopticController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createSyno(@RequestBody SynopticDTO synopticDTO) {
+    public void createSynoptic(@RequestBody SynopticDTO synopticDTO) {
         synopticCreator.insertData(synopticDTO);
     }
 
@@ -31,8 +31,8 @@ public class SynopticController {
     @PostMapping
     @RequestMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMultiSyno() {
-        synopticFacade.createMultiSynoptic();
+    public void createMultiSynoptic() {
+        synopticFacade.addMultiSynopticData();
     }
 
     @GetMapping

@@ -1,4 +1,4 @@
-package com.example.synop.config;
+package com.example.synop.config.email;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

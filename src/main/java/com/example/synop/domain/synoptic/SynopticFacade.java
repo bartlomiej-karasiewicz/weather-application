@@ -15,7 +15,7 @@ public class SynopticFacade {
     private final RestClientData restClientData;
 
 
-    public void createMultiSynoptic(){
+    public void addMultiSynopticData(){
         ssynopticCreator.insertMultiData(restClientData.retrieveData());
     }
     public Double pressureAverage(){return synopticRetrievalData.pressureAverage();}

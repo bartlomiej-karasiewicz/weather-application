@@ -1,4 +1,4 @@
-package com.example.synop.config;
+package com.example.synop.config.rest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
