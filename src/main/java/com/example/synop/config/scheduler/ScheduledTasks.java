@@ -24,9 +24,9 @@ public class ScheduledTasks {
         synopticFacade.addMultiSynopticData();
         log.info("Data was provided at "+dateFormat.format(new Date()));
     }
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 45 23 * * *")
     public void sendMail(){
-        emailSender.emailContent();
+        emailSender.sendEmailContent();
         log.info("Mail was send at " + dateFormat.format(new Date()));
     }
 }

@@ -21,7 +21,7 @@ public class EmailSenderImpl implements EmailSender {
 
 
     @Override
-    public void emailContent() {
+    public void sendEmailContent() {
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
         simpleMailMessage.setTo("harry4over@googlemail.com");
         simpleMailMessage.setSubject("Weather report");
@@ -44,6 +44,7 @@ public class EmailSenderImpl implements EmailSender {
                 .append("Minimum temperature was: " + minTemperature + " in station " + stationWithMin+".\n")
                 .append("Pressure average was: " + DECIMAL_FORMAT.format(synopticFacade.pressureAverage())+".\n")
                 .append("Wind speed was: " + DECIMAL_FORMAT.format(synopticFacade.windSpeedAverage())+".\n");
+
         return message;
     }
 }
