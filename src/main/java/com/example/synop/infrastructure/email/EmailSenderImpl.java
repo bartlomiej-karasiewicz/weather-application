@@ -19,7 +19,6 @@ public class EmailSenderImpl implements EmailSender {
     private final JavaMailSender javaMailSender;
     private final static DecimalFormat DECIMAL_FORMAT=new DecimalFormat("#.##");
 
-
     @Override
     public void sendEmailContent() {
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
