@@ -37,14 +37,14 @@ public class SynopticController {
 
     @GetMapping
     @RequestMapping("/pressure")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Double pressureAverage() {
         return synopticFacade.pressureAverage();
     }
 
     @GetMapping
     @RequestMapping("/windSpeed")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Double windSpeedAverage() {
         return synopticFacade.windSpeedAverage();
     }
@@ -52,15 +52,27 @@ public class SynopticController {
 
     @GetMapping
     @RequestMapping("/minstation")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Map<Double, String> stationWithMinTemperature() {
         return synopticFacade.stationWithMinTemperature();
     }
 
     @GetMapping
     @RequestMapping("/maxstation")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public Map<Double, String> stationWithMaxTemperature() {
         return synopticFacade.stationWithMaxTemperature();
+    }
+
+    @GetMapping
+    @RequestMapping("/parameters")
+    @ResponseStatus(HttpStatus.OK)
+    public SynopticResponse getAllParameters(){
+        return SynopticResponse.builder()
+                .pressureAverage(synopticFacade.pressureAverage())
+                .windSpeedAverage(synopticFacade.windSpeedAverage())
+                .stationWithMaxTemperature(synopticFacade.stationWithMaxTemperature())
+                .stationWithMinTemperature(synopticFacade.stationWithMinTemperature())
+                .build();
     }
 }
