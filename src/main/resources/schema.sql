@@ -1,7 +1,7 @@
 CREATE TABLE syno
 (
     id bigint NOT NULL,
-    pressure double precision,
+    pressure bigint,
     measure_date date,
     measuare_time integer,
     id_station bigint,
@@ -9,7 +9,7 @@ CREATE TABLE syno
     wind_speed double precision,
     station character varying(255),
     total_rainfall double precision,
-    temperature double precision,
+    temperature bigint,
     relative_humidity double precision,
     CONSTRAINT syno_pkey PRIMARY KEY (id)
 )
