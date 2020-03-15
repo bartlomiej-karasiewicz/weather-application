@@ -4,6 +4,7 @@ import com.example.synop.domain.client.RestClientData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -19,6 +20,7 @@ public class SynopticFacade {
     private final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
 
 
+    @Transactional
     public void addMultiSynopticData() {
         synopticCreator.insertMultiData(restClientData.retrieveData());
     }
