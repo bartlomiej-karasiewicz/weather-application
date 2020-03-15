@@ -18,5 +18,5 @@ public interface SynopticRepository extends JpaRepository<Synoptic, Long> {
 
     @Query(value = "select * from syno s where s.temperature is not null and s.station is not null",
             nativeQuery = true)
-    List<Synoptic> withoutNulls();
+    List<Synoptic> dataWithoutNulls();
 }

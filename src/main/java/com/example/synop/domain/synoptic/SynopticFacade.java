@@ -4,23 +4,55 @@ import com.example.synop.domain.client.RestClientData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class SynopticFacade {
 
-    private final SynopticCreator ssynopticCreator;
+    private final SynopticCreator synopticCreator;
     private final SynopticRetrievalData synopticRetrievalData;
     private final RestClientData restClientData;
+    private final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
 
 
-    public void addMultiSynopticData(){
-        ssynopticCreator.insertMultiData(restClientData.retrieveData());
+    public void addMultiSynopticData() {
+        synopticCreator.insertMultiData(restClientData.retrieveData());
     }
-    public Double pressureAverage(){return synopticRetrievalData.pressureAverage();}
-    public Double windSpeedAverage(){return synopticRetrievalData.windSpeedAverage();}
-    public Map<Double, String> stationWithMinTemperature(){return synopticRetrievalData.stationWithMinTemperature();}
-    public Map<Double, String> stationWithMaxTemperature(){return synopticRetrievalData.stationWithMaxTemperature();}
+
+    public Double pressureAverage() {
+        DECIMAL_FORMAT.setRoundingMode(RoundingMode.DOWN);
+        String format = DECIMAL_FORMAT.format(synopticRetrievalData.pressureAverage());
+        Double pressureAverage = null;
+        try {
+            pressureAverage = (Double) DECIMAL_FORMAT.parse(format);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return pressureAverage;
+    }
+
+    public Double windSpeedAverage() {
+        DECIMAL_FORMAT.setRoundingMode(RoundingMode.DOWN);
+        String format = DECIMAL_FORMAT.format(synopticRetrievalData.windSpeedAverage());
+        Double windSpeedAverage = null;
+        try {
+            windSpeedAverage = (Double) DECIMAL_FORMAT.parse(format);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return windSpeedAverage;
+    }
+
+    public Map<String, Double> stationWithMinTemperature() {
+        return synopticRetrievalData.stationWithMinTemperature();
+    }
+
+    public Map<String, Double> stationWithMaxTemperature() {
+        return synopticRetrievalData.stationWithMaxTemperature();
+    }
 
 }
