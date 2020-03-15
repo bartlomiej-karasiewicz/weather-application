@@ -33,7 +33,7 @@ public class Synoptic {
     private String station;
     @Column(name = "measure_date")
     private LocalDate measureDate;
-    @Column(name = "measuare_time")
+    @Column(name = "measure_time")
     private Integer measureTime;
     @Column(name = "temperature")
     private Double temperature;

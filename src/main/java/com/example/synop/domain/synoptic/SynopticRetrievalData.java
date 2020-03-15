@@ -5,6 +5,6 @@ import java.util.Map;
 public interface SynopticRetrievalData {
     Double pressureAverage();
     Double windSpeedAverage();
-    Map<Double, String> stationWithMinTemperature();
-    Map<Double, String> stationWithMaxTemperature();
+    Map<String, Double> stationWithMinTemperature();
+    Map<String, Double> stationWithMaxTemperature();
 }

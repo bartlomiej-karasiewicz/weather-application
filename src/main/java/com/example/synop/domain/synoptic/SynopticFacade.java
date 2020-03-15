@@ -47,11 +47,11 @@ public class SynopticFacade {
         return windSpeedAverage;
     }
 
-    public Map<Double, String> stationWithMinTemperature() {
+    public Map<String, Double> stationWithMinTemperature() {
         return synopticRetrievalData.stationWithMinTemperature();
     }
 
-    public Map<Double, String> stationWithMaxTemperature() {
+    public Map<String, Double> stationWithMaxTemperature() {
         return synopticRetrievalData.stationWithMaxTemperature();
     }
 

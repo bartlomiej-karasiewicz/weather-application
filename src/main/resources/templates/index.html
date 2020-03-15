@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Weather application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+
+    </script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+    <link href='//fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body onload="startTime()">
+<h1>TODAY</h1>
+<div class="container">
+    <div class="lightning">
+        <div class="date-time">
+            <div class="dmy">
+                <div id="txt"></div>
+                <div class="date">
+                    <script type="text/javascript">
+							var myDate=new Date()
+							var year=myDate.getYear()
+							if(year<1000)
+							year+=1900
+							var day=myDate.getDay()
+							var month=myDate.getMonth()
+							var daym=myDate.getDate()
+							if(daym<10)
+							daym="0"+daym
+							var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+							var monthArray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+							document.write(""+dayArray[day]+", "+monthArray[month]+" "+daym+", "+year+"")
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="forecast">
+        <div class="today-weather">
+            <h3>Weather</h3>
+            <ul>
+                <li>Avg. pressure <span th:text="${pressureAverage} + ' kPa'"></span></li>
+                <li>Avg. wind speed <span th:text="${windSpeedAverage} + ' km/h'"></span></li>
+                <li>Max temperature <span th:text="${maxTemperature} + ' °C'"></span></li>
+                <li>Min temperature <span th:text="${minTemperature} + ' °C'"></span></li>
+            </ul>
+            <h4 th:text="'Max temperature is in ' + ${stationWithMaxTemperature}"></h4>
+            <h4 th:text="'Min temperature is in ' + ${stationWithMinTemperature}"></h4>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="footer">
+    <div class="copyright">
+        <p> Design by </p>
+    </div>
+</div>
+<script>
+			function startTime() {
+				var today = new Date();
+				var h = today.getHours();
+				var m = today.getMinutes();
+				var s = today.getSeconds();
+				m = checkTime(m);
+				s = checkTime(s);
+				document.getElementById('txt').innerHTML =
+				h + ":" + m + ":" + s;
+				var t = setTimeout(startTime, 500);
+				}
+				function checkTime(i) {
+				if (i < 10) {i = "0" + i}; // add zero in front of numbers < 10
+				return i;
+			}
+
+</script>
+</body>
+</html>
