@@ -34,36 +34,36 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
     }
 
     @Override
-    public Map<Double, String> stationWithMinTemperature() {
+    public Map<String,Double> stationWithMinTemperature() {
         Double minTemperature = synopticRepository
-                .withoutNulls()
+                .dataWithoutNulls()
                 .stream()
                 .mapToDouble(value -> value.getTemperature())
                 .min()
                 .getAsDouble();
-        String stringStream = synopticRepository.withoutNulls()
+        String station = synopticRepository.dataWithoutNulls()
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<Double,String> stationWithMinTemperature=new HashMap<>();
-        stationWithMinTemperature.put(minTemperature,stringStream);
+        Map<String, Double> stationWithMinTemperature=new HashMap<>();
+        stationWithMinTemperature.put(station,minTemperature);
         return stationWithMinTemperature;
     }
 
     @Override
-    public Map<Double, String> stationWithMaxTemperature() {
+    public Map<String, Double> stationWithMaxTemperature() {
         Double minTemperature = synopticRepository
-                .withoutNulls()
+                .dataWithoutNulls()
                 .stream()
                 .mapToDouble(value -> value.getTemperature())
                 .max()
                 .getAsDouble();
-        String station = synopticRepository.withoutNulls()
+        String station = synopticRepository.dataWithoutNulls()
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<Double,String> stationWithMaxTemperature=new HashMap<>();
-        stationWithMaxTemperature.put(minTemperature,station);
+        Map<String,Double> stationWithMaxTemperature=new HashMap<>();
+        stationWithMaxTemperature.put(station,minTemperature);
         return stationWithMaxTemperature;
     }
 }

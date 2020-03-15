@@ -1,7 +1,6 @@
 package com.example.synop.api;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +13,6 @@ public class SynopticResponse {
 
     private Double pressureAverage;
     private Double windSpeedAverage;
-    private Map<Double, String> stationWithMinTemperature;
-    private Map<Double, String> stationWithMaxTemperature;
+    private Map<String, Double> stationWithMinTemperature;
+    private Map<String, Double> stationWithMaxTemperature;
 }

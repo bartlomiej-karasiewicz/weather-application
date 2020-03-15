@@ -27,11 +27,11 @@ public class EmailSenderImpl implements EmailSender {
     }
 
     private StringBuilder report() {
-        Double maxTemperature = synopticFacade.stationWithMaxTemperature().keySet().stream().findFirst().get();
-        String stationWithMax = synopticFacade.stationWithMaxTemperature().values().stream().findFirst().get();
+        Double maxTemperature = synopticFacade.stationWithMaxTemperature().values().stream().findFirst().get();
+        String stationWithMax = synopticFacade.stationWithMaxTemperature().keySet().stream().findFirst().get();
 
-        Double minTemperature = synopticFacade.stationWithMinTemperature().keySet().stream().findFirst().get();
-        String stationWithMin = synopticFacade.stationWithMinTemperature().values().stream().findFirst().get();
+        Double minTemperature = synopticFacade.stationWithMinTemperature().values().stream().findFirst().get();
+        String stationWithMin = synopticFacade.stationWithMinTemperature().keySet().stream().findFirst().get();
 
         StringBuilder message = new StringBuilder(String.valueOf(LocalDate.now()) + "\n")
                 .append("Maximum temperature was: " + maxTemperature + " in station " + stationWithMax + ".\n")
