@@ -17,7 +17,7 @@ import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "syno")
+@Table(name = "synoptic")
 @Builder
 @Getter
 @ToString
