@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -16,25 +15,16 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
 
     @Override
     public Double pressureAverage() {
-        List<Double> pressureList=synopticRepository.findByPressure();
-        return pressureList.stream()
-                .mapToDouble(value->value)
-                .average()
-                .getAsDouble();
+        return synopticRepository.findByPressure();
     }
 
     @Override
     public Double windSpeedAverage() {
-        List<Double> windSpeedList=synopticRepository.findByWindSpeed();
-        return windSpeedList
-                .stream()
-                .mapToDouble(value->value)
-                .average()
-                .getAsDouble();
+        return synopticRepository.findByWindSpeed();
     }
 
     @Override
-    public Map<String,Double> stationWithMinTemperature() {
+    public Map<String, Double> stationWithMinTemperature() {
         Double minTemperature = synopticRepository
                 .dataWithoutNulls()
                 .stream()
@@ -45,8 +35,8 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<String, Double> stationWithMinTemperature=new HashMap<>();
-        stationWithMinTemperature.put(station,minTemperature);
+        Map<String, Double> stationWithMinTemperature = new HashMap<>();
+        stationWithMinTemperature.put(station, minTemperature);
         return stationWithMinTemperature;
     }
 
@@ -62,8 +52,8 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<String,Double> stationWithMaxTemperature=new HashMap<>();
-        stationWithMaxTemperature.put(station,minTemperature);
+        Map<String, Double> stationWithMaxTemperature = new HashMap<>();
+        stationWithMaxTemperature.put(station, minTemperature);
         return stationWithMaxTemperature;
     }
 }
