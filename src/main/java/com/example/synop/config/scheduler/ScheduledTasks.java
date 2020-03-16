@@ -15,18 +15,18 @@ import java.util.Date;
 @Slf4j
 public class ScheduledTasks {
 
-    private static final SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat DATE_FORMAT =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final SynopticFacade synopticFacade;
     private final EmailSender emailSender;
 
-    @Scheduled(cron = "0 0 */3 * * *")
+    @Scheduled(cron = "0 */5 * ? * *")
     public void addAllSynopticParameters(){
         synopticFacade.addMultiSynopticData();
-        log.info("Data was provided at "+dateFormat.format(new Date()));
+        log.info("Data was provided at "+ DATE_FORMAT.format(new Date()));
     }
     @Scheduled(cron = "0 45 23 * * *")
     public void sendMail(){
         emailSender.sendEmailContent();
-        log.info("Mail was send at " + dateFormat.format(new Date()));
+        log.info("Mail was send at " + DATE_FORMAT.format(new Date()));
     }
 }
