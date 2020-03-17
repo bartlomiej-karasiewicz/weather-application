@@ -1,11 +1,16 @@
 package com.example.synop.infrastructure.synoptic;
 
+import com.example.synop.domain.synoptic.Synoptic;
 import com.example.synop.domain.synoptic.SynopticRetrievalData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +60,18 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
         Map<String, Double> stationWithMaxTemperature = new HashMap<>();
         stationWithMaxTemperature.put(station, minTemperature);
         return stationWithMaxTemperature;
+    }
+
+    @Override
+    public Date averageTemperatureSplittedByDate() {
+        return synopticRepository.groupByTemperatureByMeasureDate();
+    }
+
+    public Map<LocalDate, List<Synoptic>> averageTemperature(){
+        Map<LocalDate, List<Synoptic>> dateDoubleMap=synopticRepository
+                .findAll()
+                .stream()
+                .collect(Collectors.groupingBy(synoptic -> synoptic.getMeasureDate()));
+        return dateDoubleMap;
     }
 }
