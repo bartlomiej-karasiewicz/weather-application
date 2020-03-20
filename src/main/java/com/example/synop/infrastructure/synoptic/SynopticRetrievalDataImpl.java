@@ -1,12 +1,16 @@
 package com.example.synop.infrastructure.synoptic;
 
+import com.example.synop.domain.synoptic.Synoptic;
 import com.example.synop.domain.synoptic.SynopticRetrievalData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,25 +20,16 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
 
     @Override
     public Double pressureAverage() {
-        List<Double> pressureList=synopticRepository.findByPressure();
-        return pressureList.stream()
-                .mapToDouble(value->value)
-                .average()
-                .getAsDouble();
+        return synopticRepository.findByPressure();
     }
 
     @Override
     public Double windSpeedAverage() {
-        List<Double> windSpeedList=synopticRepository.findByWindSpeed();
-        return windSpeedList
-                .stream()
-                .mapToDouble(value->value)
-                .average()
-                .getAsDouble();
+        return synopticRepository.findByWindSpeed();
     }
 
     @Override
-    public Map<String,Double> stationWithMinTemperature() {
+    public Map<String, Double> stationWithMinTemperature() {
         Double minTemperature = synopticRepository
                 .dataWithoutNulls()
                 .stream()
@@ -45,8 +40,8 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<String, Double> stationWithMinTemperature=new HashMap<>();
-        stationWithMinTemperature.put(station,minTemperature);
+        Map<String, Double> stationWithMinTemperature = new HashMap<>();
+        stationWithMinTemperature.put(station, minTemperature);
         return stationWithMinTemperature;
     }
 
@@ -62,8 +57,21 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
                 .map(value -> value.getStation()).findFirst().get();
-        Map<String,Double> stationWithMaxTemperature=new HashMap<>();
-        stationWithMaxTemperature.put(station,minTemperature);
+        Map<String, Double> stationWithMaxTemperature = new HashMap<>();
+        stationWithMaxTemperature.put(station, minTemperature);
         return stationWithMaxTemperature;
+    }
+
+    @Override
+    public Date averageTemperatureSplittedByDate() {
+        return synopticRepository.groupByTemperatureByMeasureDate();
+    }
+
+    public Map<LocalDate, List<Synoptic>> averageTemperature(){
+        Map<LocalDate, List<Synoptic>> dateDoubleMap=synopticRepository
+                .findAll()
+                .stream()
+                .collect(Collectors.groupingBy(synoptic -> synoptic.getMeasureDate()));
+        return dateDoubleMap;
     }
 }
