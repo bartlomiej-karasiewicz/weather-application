@@ -2,6 +2,7 @@ package com.example.synop.domain.synoptic;
 
 import com.example.synop.domain.client.RestClientData;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.math3.util.Precision;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -27,27 +28,11 @@ public class SynopticFacade {
     }
 
     public Double pressureAverage() {
-        DECIMAL_FORMAT.setRoundingMode(RoundingMode.DOWN);
-        String format = DECIMAL_FORMAT.format(synopticRetrievalData.pressureAverage());
-        Double pressureAverage = null;
-        try {
-            pressureAverage = (Double) DECIMAL_FORMAT.parse(format);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return pressureAverage;
+        return Precision.round(synopticRetrievalData.pressureAverage(), 2);
     }
 
     public Double windSpeedAverage() {
-        DECIMAL_FORMAT.setRoundingMode(RoundingMode.DOWN);
-        String format = DECIMAL_FORMAT.format(synopticRetrievalData.windSpeedAverage());
-        Double windSpeedAverage = null;
-        try {
-            windSpeedAverage = (Double) DECIMAL_FORMAT.parse(format);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return windSpeedAverage;
+        return Precision.round(synopticRetrievalData.windSpeedAverage(),2);
     }
 
     public Map<String, Double> stationWithMinTemperature() {
