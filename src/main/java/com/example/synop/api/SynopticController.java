@@ -1,66 +1,29 @@
 package com.example.synop.api;
 
-import com.example.synop.domain.synoptic.SynopticCreator;
 import com.example.synop.domain.synoptic.SynopticFacade;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
-@RestController
-@RequestMapping("v1/syno")
+@Controller
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class SynopticController {
 
-    private final SynopticCreator synopticCreator;
     private final SynopticFacade synopticFacade;
+    private final static String INDEX_VIEW = "index";
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createSynoptic(@RequestBody SynopticDTO synopticDTO) {
-        synopticCreator.insertData(synopticDTO);
+    @GetMapping(value = "/")
+    public String parameters(Model model) {
+        model.addAttribute("pressureAverage", synopticFacade.pressureAverage());
+        model.addAttribute("windSpeedAverage", synopticFacade.windSpeedAverage());
+        model.addAttribute("stationWithMinTemperature", synopticFacade.stationWithMinTemperature());
+        model.addAttribute("stationWithMaxTemperature", synopticFacade.stationWithMaxTemperature());
+        model.addAttribute("temperatureMapGroupByDate", synopticFacade.averageTemperatureGroupingByDate());
+        return INDEX_VIEW;
     }
 
 
-    @PostMapping
-    @RequestMapping("/list")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createMultiSynoptic() {
-        synopticFacade.addMultiSynopticData();
-    }
-
-    @GetMapping
-    @RequestMapping("/pressure")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Double pressureAverage() {
-        return synopticFacade.pressureAverage();
-    }
-
-    @GetMapping
-    @RequestMapping("/windSpeed")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Double windSpeedAverage() {
-        return synopticFacade.windSpeedAverage();
-    }
-
-
-    @GetMapping
-    @RequestMapping("/minstation")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Map<Double, String> stationWithMinTemperature() {
-        return synopticFacade.stationWithMinTemperature();
-    }
-
-    @GetMapping
-    @RequestMapping("/maxstation")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Map<Double, String> stationWithMaxTemperature() {
-        return synopticFacade.stationWithMaxTemperature();
-    }
 }

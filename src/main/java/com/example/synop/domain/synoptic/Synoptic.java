@@ -17,7 +17,7 @@ import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "syno")
+@Table(name = "synoptic")
 @Builder
 @Getter
 @ToString
@@ -33,7 +33,7 @@ public class Synoptic {
     private String station;
     @Column(name = "measure_date")
     private LocalDate measureDate;
-    @Column(name = "measuare_time")
+    @Column(name = "measure_time")
     private Integer measureTime;
     @Column(name = "temperature")
     private Double temperature;

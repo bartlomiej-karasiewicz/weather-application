@@ -1,12 +1,15 @@
 package com.example.synop.infrastructure.synoptic;
 
+import com.example.synop.domain.synoptic.Synoptic;
 import com.example.synop.domain.synoptic.SynopticRetrievalData;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.math3.util.Precision;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,54 +19,58 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
 
     @Override
     public Double pressureAverage() {
-        List<Double> pressureList=synopticRepository.findByPressure();
-        return pressureList.stream()
-                .mapToDouble(value->value)
-                .average()
-                .getAsDouble();
+        return Precision.round(synopticRepository.findByPressure(),2);
     }
 
     @Override
     public Double windSpeedAverage() {
-        List<Double> windSpeedList=synopticRepository.findByWindSpeed();
-        return windSpeedList
-                .stream()
-                .mapToDouble(value->value)
-                .average()
-                .getAsDouble();
+        return Precision.round(synopticRepository.findByWindSpeed(),2);
     }
 
     @Override
-    public Map<Double, String> stationWithMinTemperature() {
+    public Map<String, Double> stationWithMinTemperature() {
         Double minTemperature = synopticRepository
-                .withoutNulls()
+                .dataWithoutNulls()
                 .stream()
-                .mapToDouble(value -> value.getTemperature())
+                .mapToDouble(Synoptic::getTemperature)
                 .min()
                 .getAsDouble();
-        String stringStream = synopticRepository.withoutNulls()
+        String station = synopticRepository.dataWithoutNulls()
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
-                .map(value -> value.getStation()).findFirst().get();
-        Map<Double,String> stationWithMinTemperature=new HashMap<>();
-        stationWithMinTemperature.put(minTemperature,stringStream);
+                .map(Synoptic::getStation).findFirst()
+                .get();
+        Map<String, Double> stationWithMinTemperature = new HashMap<>();
+        stationWithMinTemperature.put(station, minTemperature);
         return stationWithMinTemperature;
     }
 
     @Override
-    public Map<Double, String> stationWithMaxTemperature() {
+    public Map<String, Double> stationWithMaxTemperature() {
         Double minTemperature = synopticRepository
-                .withoutNulls()
+                .dataWithoutNulls()
                 .stream()
-                .mapToDouble(value -> value.getTemperature())
+                .mapToDouble(Synoptic::getTemperature)
                 .max()
                 .getAsDouble();
-        String station = synopticRepository.withoutNulls()
+        String station = synopticRepository.dataWithoutNulls()
                 .stream()
                 .filter(value -> minTemperature.equals(value.getTemperature()))
-                .map(value -> value.getStation()).findFirst().get();
-        Map<Double,String> stationWithMaxTemperature=new HashMap<>();
-        stationWithMaxTemperature.put(minTemperature,station);
+                .map(Synoptic::getStation).findFirst()
+                .get();
+        Map<String, Double> stationWithMaxTemperature = new HashMap<>();
+        stationWithMaxTemperature.put(station, minTemperature);
         return stationWithMaxTemperature;
+    }
+
+    @Override
+    public Map<LocalDate, Double> averageTemperatureGroupingByDate() {
+        Map<LocalDate, Double> averageTemperatureBaseOnDate = new HashMap<>();
+        synopticRepository.findAll()
+                .stream()
+                .collect(Collectors.groupingBy(Synoptic::getMeasureDate,
+                        Collectors.averagingDouble(Synoptic::getTemperature)))
+                .forEach((localDate, temperature) -> averageTemperatureBaseOnDate.put(localDate, Precision.round(temperature, 1)));
+        return averageTemperatureBaseOnDate;
     }
 }
