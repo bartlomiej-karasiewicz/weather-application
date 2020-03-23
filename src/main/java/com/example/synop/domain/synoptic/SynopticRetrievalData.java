@@ -1,6 +1,5 @@
 package com.example.synop.domain.synoptic;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -9,5 +8,5 @@ public interface SynopticRetrievalData {
     Double windSpeedAverage();
     Map<String, Double> stationWithMinTemperature();
     Map<String, Double> stationWithMaxTemperature();
-    Date averageTemperatureSplittedByDate();
+    Map<LocalDate, Double> averageTemperatureGroupingByDate();
 }
