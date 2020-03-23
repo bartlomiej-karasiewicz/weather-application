@@ -19,10 +19,9 @@ public class SynopticController {
     public String parameters(Model model) {
         model.addAttribute("pressureAverage", synopticFacade.pressureAverage());
         model.addAttribute("windSpeedAverage", synopticFacade.windSpeedAverage());
-        model.addAttribute("maxTemperature", synopticFacade.stationWithMaxTemperature().values().toArray()[0]);
-        model.addAttribute("minTemperature", synopticFacade.stationWithMinTemperature().values().toArray()[0]);
-        model.addAttribute("stationWithMinTemperature", synopticFacade.stationWithMinTemperature().keySet().toArray()[0]);
-        model.addAttribute("stationWithMaxTemperature", synopticFacade.stationWithMaxTemperature().keySet().toArray()[0]);
+        model.addAttribute("stationWithMinTemperature", synopticFacade.stationWithMinTemperature());
+        model.addAttribute("stationWithMaxTemperature", synopticFacade.stationWithMaxTemperature());
+        model.addAttribute("temperatureMapGroupByDate", synopticFacade.averageTemperatureGroupingByDate());
         return INDEX_VIEW;
     }
 

@@ -6,10 +6,8 @@ import org.apache.commons.math3.util.Precision;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.RoundingMode;
-import java.sql.Date;
 import java.text.DecimalFormat;
-import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Map;
 
 @Service
@@ -19,8 +17,6 @@ public class SynopticFacade {
     private final SynopticCreator synopticCreator;
     private final SynopticRetrievalData synopticRetrievalData;
     private final RestClientData restClientData;
-    private final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
-
 
     @Transactional
     public void addMultiSynopticData() {
@@ -28,11 +24,11 @@ public class SynopticFacade {
     }
 
     public Double pressureAverage() {
-        return Precision.round(synopticRetrievalData.pressureAverage(), 2);
+        return synopticRetrievalData.pressureAverage();
     }
 
     public Double windSpeedAverage() {
-        return Precision.round(synopticRetrievalData.windSpeedAverage(),2);
+        return synopticRetrievalData.windSpeedAverage();
     }
 
     public Map<String, Double> stationWithMinTemperature() {
@@ -43,6 +39,7 @@ public class SynopticFacade {
         return synopticRetrievalData.stationWithMaxTemperature();
     }
 
-    public Date averageTemperatureSplittedByDate() {return synopticRetrievalData.averageTemperatureSplittedByDate();}
-
+    public Map<LocalDate, Double> averageTemperatureGroupingByDate() {
+        return synopticRetrievalData.averageTemperatureGroupingByDate();
+    }
 }

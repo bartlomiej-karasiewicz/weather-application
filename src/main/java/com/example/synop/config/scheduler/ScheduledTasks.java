@@ -19,14 +19,14 @@ public class ScheduledTasks {
     private final SynopticFacade synopticFacade;
     private final EmailSender emailSender;
 
-//    @Scheduled(cron = "0 0 */4 ? * *")
-//    public void addAllSynopticParameters(){
-//        synopticFacade.addMultiSynopticData();
-//        log.info("Data was provided at "+ DATE_FORMAT.format(new Date()));
-//    }
-//    @Scheduled(cron = "0 0 6 * * ?")
-//    public void sendMail(){
-//        emailSender.sendEmailContent();
-//        log.info("Mail was send at " + DATE_FORMAT.format(new Date()));
-//    }
+    @Scheduled(cron = "0 0 */4 ? * *")
+    public void addAllSynopticParameters(){
+        synopticFacade.addMultiSynopticData();
+        log.info("Data was provided at "+ DATE_FORMAT.format(new Date()));
+    }
+    @Scheduled(cron = "0 0 */12 ? * *")
+    public void sendMail(){
+        emailSender.sendEmailContent();
+        log.info("Mail was send at " + DATE_FORMAT.format(new Date()));
+    }
 }
