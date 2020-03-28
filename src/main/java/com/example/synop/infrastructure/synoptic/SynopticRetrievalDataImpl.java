@@ -19,12 +19,12 @@ public class SynopticRetrievalDataImpl implements SynopticRetrievalData {
 
     @Override
     public Double pressureAverage() {
-        return Precision.round(synopticRepository.findByPressure(),2);
+        return Precision.round(synopticRepository.pressureAverage(),2);
     }
 
     @Override
     public Double windSpeedAverage() {
-        return Precision.round(synopticRepository.findByWindSpeed(),2);
+        return Precision.round(synopticRepository.windSpeedAverage(),2);
     }
 
     @Override
