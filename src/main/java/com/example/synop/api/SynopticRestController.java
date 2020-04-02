@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.util.Map;
-
 @RestController
 @RequestMapping("v1/syno")
 @RequiredArgsConstructor
@@ -48,12 +45,5 @@ public class SynopticRestController {
                 .stationWithMaxTemperature(synopticFacade.stationWithMaxTemperature())
                 .stationWithMinTemperature(synopticFacade.stationWithMinTemperature())
                 .build();
-    }
-
-    @GetMapping
-    @RequestMapping("/temperature")
-    @ResponseStatus(HttpStatus.OK)
-    public Map<LocalDate, Double> averageTemperatureGroupingByDate() {
-        return synopticFacade.averageTemperatureGroupingByDate();
     }
 }

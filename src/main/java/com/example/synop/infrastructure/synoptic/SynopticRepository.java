@@ -13,11 +13,11 @@ public interface SynopticRepository extends JpaRepository<Synoptic, Long> {
 
     @Query(value = "select avg(s.pressure) from synoptic s",
             nativeQuery = true)
-    Double findByPressure();
+    Double pressureAverage();
 
     @Query(value = "select avg(s.wind_speed) from synoptic s",
             nativeQuery = true)
-    Double findByWindSpeed();
+    Double windSpeedAverage();
 
     @Query(value = "select * from synoptic s " +
             "where s.temperature is not null " +
@@ -25,9 +25,5 @@ public interface SynopticRepository extends JpaRepository<Synoptic, Long> {
             "and s.measure_date=current_date",
             nativeQuery = true)
     List<Synoptic> dataWithoutNulls();
-
-    @Query(value = "select s.measure_date from synoptic s group by s.measure_date",
-    nativeQuery = true)
-    Date groupByTemperatureByMeasureDate();
 
 }
