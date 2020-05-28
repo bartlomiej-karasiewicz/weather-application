@@ -26,7 +26,7 @@ public class ScheduledTasks {
     }
     @Scheduled(cron = "0 0 */12 ? * *")
     public void sendMail(){
-        emailSender.sendEmailContent();
+        emailSender.sendEmailContent("harry4over@gmail.com");
         log.info("Mail was send at " + DATE_FORMAT.format(new Date()));
     }
 }

@@ -422,4 +422,7 @@ div#txt {
 	.temperature p {
 		padding-bottom: 15px;
 	}
+.error {
+    color: red;
+    }
 }

@@ -11,6 +11,12 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 </head>
 <body onload="startTime()">
+<form th:action="@{/email}" th:object="${receiver}" method="POST">
+    <P>If you want receive weather report, please provide your mail <input type="text" th:field="*{mailAddress}">
+        <label th:if="${#fields.hasErrors('mailAddress')}" th:class="'error'">Wrong mail. Try again.</label>
+        <button type="submit">Send</button>
+    </P>
+</form>
 <h1>TODAY</h1>
 <div class="container">
     <div class="lightning">
@@ -41,8 +47,8 @@
 
 <figure class="highcharts-figure">
     <div id="container"></div>
-        <script src="/js/high-chart-theme.js"></script>
-        <script th:inline="javascript">
+    <script src="/js/high-chart-theme.js"></script>
+    <script th:inline="javascript">
         Highcharts.chart('container', {
             chart: {
                 type: 'line'
@@ -71,7 +77,10 @@
                 data: [[${temperatureMapGroupByDate.values()}]]
             }]
         });
-        </script>
+
+
+
+    </script>
 </figure>
 <div class="footer">
     <div class="copyright">
@@ -94,6 +103,7 @@
 				if (i < 10) {i = "0" + i}; // add zero in front of numbers < 10
 				return i;
 			}
+
 </script>
 </body>
 </html>

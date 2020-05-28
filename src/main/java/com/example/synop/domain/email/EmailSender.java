@@ -2,5 +2,5 @@ package com.example.synop.domain.email;
 
 public interface EmailSender {
 
-    void sendEmailContent();
+    void sendEmailContent(String receiver);
 }

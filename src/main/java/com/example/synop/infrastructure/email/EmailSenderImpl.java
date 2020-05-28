@@ -17,9 +17,9 @@ public class EmailSenderImpl implements EmailSender {
     private final JavaMailSender javaMailSender;
 
     @Override
-    public void sendEmailContent() {
+    public void sendEmailContent(String receiver) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setTo("harry4over@googlemail.com");
+        simpleMailMessage.setTo(receiver);
         simpleMailMessage.setSubject("Weather report");
 
         simpleMailMessage.setText(report().toString());
