@@ -1,4 +1,4 @@
-package com.example.synop.domain.email;
+package com.example.synop.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,11 +14,9 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @ToString
-public class Receiver {
+public class ReceiverDTO {
 
     @Email
-    @NotEmpty (message = "Empty")
+    @NotEmpty
     private String mailAddress;
-    private String content;
-
 }

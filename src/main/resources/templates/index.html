@@ -11,9 +11,9 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
 </head>
 <body onload="startTime()">
-<form th:action="@{/email}" th:object="${receiver}" method="POST">
+<form th:action="@{/email}" th:object="${receiverDTO}" method="POST">
     <P>If you want receive weather report, please provide your mail <input type="text" th:field="*{mailAddress}">
-        <label th:if="${#fields.hasErrors('mailAddress')}" th:class="'error'">Wrong mail. Try again.</label>
+        <span th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" th:errorclass="error"></span>
         <button type="submit">Send</button>
     </P>
 </form>
@@ -80,6 +80,7 @@
 
 
 
+
     </script>
 </figure>
 <div class="footer">
@@ -103,6 +104,7 @@
 				if (i < 10) {i = "0" + i}; // add zero in front of numbers < 10
 				return i;
 			}
+
 
 </script>
 </body>
