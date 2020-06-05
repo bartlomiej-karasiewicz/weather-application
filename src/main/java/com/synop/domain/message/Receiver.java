@@ -1,4 +1,4 @@
-package com.synop.domain.email;
+package com.synop.domain.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

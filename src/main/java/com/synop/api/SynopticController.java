@@ -1,6 +1,6 @@
 package com.synop.api;
 
-import com.synop.domain.email.EmailSender;
+import com.synop.domain.message.MessageSender;
 import com.synop.domain.synoptic.SynopticFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
 public class SynopticController {
 
     private final SynopticFacade synopticFacade;
-    private final EmailSender emailSender;
+    private final MessageSender messageSender;
     private final static String INDEX_VIEW = "index";
     private final static String SUCCESS_SEND_VIEW = "success";
 
@@ -42,8 +42,7 @@ public class SynopticController {
             return "redirect:/";
         }
         model.addAttribute("receiverDTO", receiverDTO);
-        //emailSender.sendEmailContent(receiverDTO.getMailAddress());
-        emailSender.sendToQueque(receiverDTO.getMailAddress());
+        messageSender.sendToQueue(receiverDTO.getMailAddress());
         log.info("Message sent successfully on queue");
         return SUCCESS_SEND_VIEW;
     }

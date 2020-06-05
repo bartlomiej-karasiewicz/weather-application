@@ -1,6 +1,6 @@
 package com.synop.config.scheduler;
 
-import com.synop.domain.email.EmailSender;
+import com.synop.domain.message.MessageSender;
 import com.synop.domain.synoptic.SynopticFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ public class ScheduledTasks {
 
     private static final SimpleDateFormat DATE_FORMAT =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final SynopticFacade synopticFacade;
-    private final EmailSender emailSender;
+    private final MessageSender messageSender;
 
     @Scheduled(cron = "0 0 */4 ? * *")
     public void addAllSynopticParameters(){
@@ -26,7 +26,7 @@ public class ScheduledTasks {
     }
     @Scheduled(cron = "0 0 */12 ? * *")
     public void sendMail(){
-        emailSender.sendEmailContent("harry4over@gmail.com");
+        messageSender.sendToQueue("harry4over@gmail.com");
         log.info("Mail was send at " + DATE_FORMAT.format(new Date()));
     }
 }
