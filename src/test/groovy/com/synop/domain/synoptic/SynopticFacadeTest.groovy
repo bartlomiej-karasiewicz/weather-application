@@ -10,7 +10,6 @@ import spock.lang.Specification
 import java.time.LocalDate
 
 class SynopticFacadeTest extends Specification {
-
     SynopticRepository synopticRepository = Mock(SynopticRepository)
     RestClientData restClientData = Mock(RestClientData)
     SynopticRetrievalData synopticRetrievalData = new SynopticRetrievalDataImpl(synopticRepository)
